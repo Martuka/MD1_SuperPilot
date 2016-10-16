@@ -1,4 +1,8 @@
 # Superpilot
 ### Project by Marta Revulta
+###### Code by Laurent Weingart
 
-RSS reader written in python
+Simple specific RSS article analyzer written in python.
+
+##### Dependencies:
+ - FeedParser: pip install feedparser
