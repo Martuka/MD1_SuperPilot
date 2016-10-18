@@ -1,5 +1,5 @@
-# Superpilot
-### By Marta Revulta
+# SuperPilot
+### By Marta Revuelta
 ###### Code by Laurent Weingart
 
 Simple specific RSS article analyzer written in python. This program reads RSS feeds and looks for the presence of key words in the articles.
