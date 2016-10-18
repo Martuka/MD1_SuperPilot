@@ -7,8 +7,9 @@
 
 import feedparser
 import requests
-from lxml import html
+import datetime
 import re as regex
+from lxml import html
 from collections import Counter
 from collections import OrderedDict
 from operator import itemgetter
@@ -59,6 +60,9 @@ def get_article_from_rss_url(url, div_class_name):
 	else:
 		return ""
 
+def my_print(string):
+	print(string)
+	logs.write(string)
 ###############################################################################
 ## Main
 if __name__ == '__main__':
@@ -132,6 +136,6 @@ if __name__ == '__main__':
 	logs.write("In total, there were {} word matches.\n".format(global_match_occurrences))
 	for k, v in sorted(result.items(), key=itemgetter(1), reverse=True):
 		print(k, v)
-		logs.write("{}: {}".format(k, v))
+		logs.write("{}: {}\n".format(k, v))
 
 	logs.close()
