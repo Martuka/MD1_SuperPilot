@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/local/bin/python3
 # -#- coding: utf-8 -#-
 
 # Superpilot
@@ -17,7 +17,7 @@ DEBUG = False
 article_counter = 0
 global_match_occurrences = 0
 
-rss_urls_list = "test.txt"
+rss_urls_list = "feeds.txt"
 key_words_list = "keywords.txt"
 
 # This variable is the name of the class attribute of the <div> containg the
