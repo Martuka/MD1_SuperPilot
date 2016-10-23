@@ -1,5 +1,5 @@
 #!/usr/bin/python
-#import Adafruit_MotorHAT, Adafruit_DCMotor, Adafruit_Stepper 
+#import Adafruit_MotorHAT, Adafruit_DCMotor, Adafruit_Stepper
 from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor, Adafruit_StepperMotor
 
 import time
@@ -34,5 +34,5 @@ while (True):
 	myStepper.step(100, Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.INTERLEAVE)
 
 	print("Microsteps")
-        myStepper.step(100, Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.MICROSTEP)
-        myStepper.step(100, Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.MICROSTEP)
+    myStepper.step(100, Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.MICROSTEP)
+    myStepper.step(100, Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.MICROSTEP)
