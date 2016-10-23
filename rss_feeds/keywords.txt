@@ -26,8 +26,6 @@ death
 dead
 die
 died
-border
-border crossers
 extortion
 extorsions
 danger 
