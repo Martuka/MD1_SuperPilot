@@ -107,6 +107,27 @@ def new_article(entry, now, interval):
 		return True
 	return False
 
+# recommended for auto-disabling motors on shutdown!
+def turnOffMotors():
+	mh.getMotor(1).run(Adafruit_MotorHAT.RELEASE)
+	mh.getMotor(2).run(Adafruit_MotorHAT.RELEASE)
+	mh.getMotor(3).run(Adafruit_MotorHAT.RELEASE)
+	mh.getMotor(4).run(Adafruit_MotorHAT.RELEASE)
+
+
+def rotate_motors(motor1, motor2):
+	for i in range(0, 200):
+		motor1.oneStep(Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.SINGLE)
+		motor2.oneStep(Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.SINGLE)
+	for i in range(0, 200):
+		motor1.oneStep(Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.DOUBLE)
+		motor2.oneStep(Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.DOUBLE)
+	for i in range(0, 200):
+		motor1.oneStep(Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.INTERLEAVE)
+		motor2.oneStep(Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.INTERLEAVE)
+	for i in range(0, 200):
+		motor1.oneStep(Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.MICROSTEP)
+		motor2.oneStep(Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.MICROSTEP)
 ###############################################################################
 ## Main
 if __name__ == '__main__':
@@ -125,17 +146,12 @@ if __name__ == '__main__':
 	# create a default object, no changes to I2C address or frequency
 	mh = Adafruit_MotorHAT()
 
-	# recommended for auto-disabling motors on shutdown!
-	def turnOffMotors():
-		mh.getMotor(1).run(Adafruit_MotorHAT.RELEASE)
-		mh.getMotor(2).run(Adafruit_MotorHAT.RELEASE)
-		mh.getMotor(3).run(Adafruit_MotorHAT.RELEASE)
-		mh.getMotor(4).run(Adafruit_MotorHAT.RELEASE)
-
 	atexit.register(turnOffMotors)
 
-	myStepper = mh.getStepper(200, 1)  	# 200 steps/rev, motor port #1
-	myStepper.setSpeed(30)  			# 30 RPM
+	motor1 = mh.getStepper(200, 1)  	# 200 steps/rev, motor port #1
+	motor1.setSpeed(60)  				# RPM
+	motor2 = mh.getStepper(200, 2)
+	motor2.setSpeed(60)
 
 	now = datetime.datetime.now()
 
@@ -172,7 +188,7 @@ if __name__ == '__main__':
 
 				for word in wordlist:
 					if word in key_words:
-						myStepper.step(100, Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.DOUBLE)
+						rotate_motors(motor1, motor2)
 						article_list.append(word)
 
 				matching_words.extend(article_list)
