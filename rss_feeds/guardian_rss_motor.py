@@ -19,6 +19,11 @@ from collections import Counter
 from collections import OrderedDict
 from operator import itemgetter
 
+# Adafruit library realted imports
+import atexit
+from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor, Adafruit_StepperMotor
+
+
 ###############################################################################
 ## Global Variables
 
@@ -117,6 +122,21 @@ if __name__ == '__main__':
 		print_usage()
 		sys.exit(0)
 
+	# create a default object, no changes to I2C address or frequency
+	mh = Adafruit_MotorHAT()
+
+	# recommended for auto-disabling motors on shutdown!
+	def turnOffMotors():
+		mh.getMotor(1).run(Adafruit_MotorHAT.RELEASE)
+		mh.getMotor(2).run(Adafruit_MotorHAT.RELEASE)
+		mh.getMotor(3).run(Adafruit_MotorHAT.RELEASE)
+		mh.getMotor(4).run(Adafruit_MotorHAT.RELEASE)
+
+	atexit.register(turnOffMotors)
+
+	myStepper = mh.getStepper(200, 1)  	# 200 steps/rev, motor port #1
+	myStepper.setSpeed(30)  			# 30 RPM
+
 	now = datetime.datetime.now()
 
 	logs = open(log_file, "w")
@@ -152,6 +172,7 @@ if __name__ == '__main__':
 
 				for word in wordlist:
 					if word in key_words:
+						myStepper.step(100, Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.DOUBLE)
 						article_list.append(word)
 
 				matching_words.extend(article_list)
