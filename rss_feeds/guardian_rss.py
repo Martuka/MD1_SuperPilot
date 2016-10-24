@@ -1,5 +1,5 @@
 #!/usr/local/bin/python3
-# -#- coding: utf-8 -#-
+# -*- coding: utf-8 -*-
 
 # Superpilot
 # Basic rss feeds analyser for The Guardian RSS feed
