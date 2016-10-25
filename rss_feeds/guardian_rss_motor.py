@@ -28,7 +28,7 @@ from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor, Adafruit_Step
 ## Global Variables
 
 # Interval between two check in seconds
-interval_time = 60
+# interval_time = 60
 
 DEBUG = True
 WRITE_LOGS = False
@@ -149,8 +149,7 @@ def check_args():
 ## Main
 if __name__ == '__main__':
 
-	# not used while interval is hard coded
-	# check_args()
+	check_args()
 
 	# create a default object, no changes to I2C address or frequency
 	mh = Adafruit_MotorHAT()
