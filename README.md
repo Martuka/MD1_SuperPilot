@@ -21,5 +21,5 @@ Currently this program only works with RSS feeds from
 [The Guardian](https://www.theguardian.com/international).
 
 To execute the program:</br>
-`python3 guardian_rss.py <interval>`</br>
+`python guardian_rss_motor.py <interval>`</br>
 where interval is the time in seconds between two checks for new RSS articles.
