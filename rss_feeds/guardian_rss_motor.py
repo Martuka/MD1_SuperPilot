@@ -144,12 +144,13 @@ def check_args():
 		print '"%s" does not represent a number of seconds: %s' % (sys.argv[1], ex)
 		print_usage()
 		sys.exit(0)
+	return interval_time
 
 ###############################################################################
 ## Main
 if __name__ == '__main__':
 
-	check_args()
+	interval_time = check_args()
 
 	# create a default object, no changes to I2C address or frequency
 	mh = Adafruit_MotorHAT()
