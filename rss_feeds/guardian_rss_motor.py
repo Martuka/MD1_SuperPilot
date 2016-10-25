@@ -140,11 +140,12 @@ def check_args():
 		sys.exit(0)
 
 	try:
-		interval_time = int(sys.argv[1])
+		interval_time = int(sys.argv[1]) * 60
 	except ValueError as ex:
 		print '"%s" does not represent a number of seconds: %s' % (sys.argv[1], ex)
 		print_usage()
 		sys.exit(0)
+	print "interval time = ", interval_time
 	return interval_time
 
 ###############################################################################
