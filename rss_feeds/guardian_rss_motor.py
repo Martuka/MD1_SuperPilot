@@ -31,7 +31,7 @@ from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor, Adafruit_Step
 # interval_time = 60
 
 DEBUG = True
-WRITE_LOGS = False
+WRITE_LOGS = True
 article_counter = 0
 global_match_occurrences = 0
 
@@ -119,18 +119,19 @@ def turnOffMotors():
 
 # Make the two motors turn simultaniously
 def rotate_motors(motor1, motor2):
-	for i in range(0, 200):
-		motor1.oneStep(Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.SINGLE)
-		motor2.oneStep(Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.SINGLE)
-	for i in range(0, 200):
-		motor1.oneStep(Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.DOUBLE)
-		motor2.oneStep(Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.DOUBLE)
-	for i in range(0, 200):
-		motor1.oneStep(Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.INTERLEAVE)
-		motor2.oneStep(Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.INTERLEAVE)
+#	for i in range(0, 200):
+#		motor1.oneStep(Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.SINGLE)
+#		motor2.oneStep(Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.SINGLE)
+#	for i in range(0, 200):
+#		motor1.oneStep(Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.DOUBLE)
+#		motor2.oneStep(Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.DOUBLE)
+#	for i in range(0, 200):
+#		motor1.oneStep(Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.INTERLEAVE)
+#		motor2.oneStep(Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.INTERLEAVE)
 	for i in range(0, 200):
 		motor1.oneStep(Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.MICROSTEP)
 		motor2.oneStep(Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.MICROSTEP)
+	time.sleep(1)
 
 # Check the command line arguments
 def check_args():
@@ -169,10 +170,11 @@ if __name__ == '__main__':
 	hit_list = list_feeds_urls(rss_urls_list)
 	key_words =	get_key_words(key_words_list)
 	my_print("\n")
-	my_print("\n")
 	my_print("====================================================================")
 	my_print("=========================                  =========================")
 	my_print("========================= RSS The Guardian =========================")
+	my_print("\ntime is")
+	my_print(str(now))
 	my_print("\n")
 	my_print("Key words = \n")
 	my_print(" ".join(key_words))
