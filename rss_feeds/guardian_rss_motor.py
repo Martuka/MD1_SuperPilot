@@ -27,8 +27,11 @@ from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor, Adafruit_Step
 ###############################################################################
 ## Global Variables
 
+# Interval between two check in seconds
+interval_time = 60
+
 DEBUG = True
-WRITE_LOGS = True
+WRITE_LOGS = False
 article_counter = 0
 global_match_occurrences = 0
 
@@ -107,14 +110,14 @@ def new_article(entry, now, interval):
 		return True
 	return False
 
-# recommended for auto-disabling motors on shutdown!
+# Recommended for auto-disabling motors on shutdown!
 def turnOffMotors():
 	mh.getMotor(1).run(Adafruit_MotorHAT.RELEASE)
 	mh.getMotor(2).run(Adafruit_MotorHAT.RELEASE)
 	mh.getMotor(3).run(Adafruit_MotorHAT.RELEASE)
 	mh.getMotor(4).run(Adafruit_MotorHAT.RELEASE)
 
-
+# Make the two motors turn simultaniously
 def rotate_motors(motor1, motor2):
 	for i in range(0, 200):
 		motor1.oneStep(Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.SINGLE)
@@ -128,10 +131,9 @@ def rotate_motors(motor1, motor2):
 	for i in range(0, 200):
 		motor1.oneStep(Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.MICROSTEP)
 		motor2.oneStep(Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.MICROSTEP)
-###############################################################################
-## Main
-if __name__ == '__main__':
 
+# Check the command line arguments
+def check_args():
 	if len(sys.argv) != 2:
 		print_usage()
 		sys.exit(0)
@@ -142,6 +144,13 @@ if __name__ == '__main__':
 		print '"%s" does not represent a number of seconds: %s' % (sys.argv[1], ex)
 		print_usage()
 		sys.exit(0)
+
+###############################################################################
+## Main
+if __name__ == '__main__':
+
+	# not used while interval is hard coded
+	# check_args()
 
 	# create a default object, no changes to I2C address or frequency
 	mh = Adafruit_MotorHAT()
