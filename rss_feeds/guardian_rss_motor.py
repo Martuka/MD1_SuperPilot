@@ -152,7 +152,7 @@ def check_args():
 ## Main
 if __name__ == '__main__':
 
-	interval_time = check_args()
+	interval_time = 60 # check_args()
 
 	# create a default object, no changes to I2C address or frequency
 	mh = Adafruit_MotorHAT()
