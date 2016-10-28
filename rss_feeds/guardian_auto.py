@@ -148,6 +148,9 @@ def check_args():
 	print "interval time = ", interval_time
 	return interval_time
 
+def close_logfile():
+	logs.close()
+
 ###############################################################################
 ## Main
 if __name__ == '__main__':
@@ -158,6 +161,7 @@ if __name__ == '__main__':
 	mh = Adafruit_MotorHAT()
 
 	atexit.register(turnOffMotors)
+	atexit.register(close_logfile)
 
 	motor1 = mh.getStepper(200, 1)  	# 200 steps/rev, motor port #1
 	motor1.setSpeed(60)  				# RPM
@@ -218,6 +222,5 @@ if __name__ == '__main__':
 		my_print("In total, there were {} word matches.\n".format(global_match_occurrences))
 		for k, v in sorted(result.items(), key=itemgetter(1), reverse=True):
 			my_print("{}: {}\n".format(k, v))
-		logs.close()
 
 		time.sleep(interval_time)
