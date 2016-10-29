@@ -228,4 +228,5 @@ if __name__ == '__main__':
 		second = time_in_seconds_from_date(after)
 		diff = int(round(second - first)) + 3
 		sleep_time = interval_time - diff
-		time.sleep(sleep_time)
+		if sleep_time >= 0:
+			time.sleep(sleep_time)
