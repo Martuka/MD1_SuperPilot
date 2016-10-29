@@ -140,7 +140,7 @@ def check_args():
 		sys.exit(0)
 
 	try:
-		interval_time = int(sys.argv[1]) * 60
+		interval_time = int(sys.argv[1])
 	except ValueError as ex:
 		print '"%s" does not represent a number of seconds: %s' % (sys.argv[1], ex)
 		print_usage()
@@ -152,7 +152,7 @@ def check_args():
 ## Main
 if __name__ == '__main__':
 
-	interval_time = 60 # check_args()
+	interval_time = check_args()
 
 	# create a default object, no changes to I2C address or frequency
 	mh = Adafruit_MotorHAT()
@@ -194,7 +194,7 @@ if __name__ == '__main__':
 				web_page_url = entry.link
 				article = get_article_from_rss_url(web_page_url, article_class_name)
 				wordlist = create_word_list_from_text(article)
-				my_print("\nArticle:  '{}'\n\n".format(entry.title))
+				my_print("\nArticle:  '{}'\n\n".format(entry.title.encode('utf8')))
 				my_print("Word list:\n")
 				my_print(", ".join(wordlist))
 
