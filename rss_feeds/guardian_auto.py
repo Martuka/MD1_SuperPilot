@@ -199,7 +199,7 @@ if __name__ == '__main__':
 					web_page_url = entry.link
 					article = get_article_from_rss_url(web_page_url, article_class_name)
 					wordlist = create_word_list_from_text(article)
-					my_print("\nArticle:  '{}'\n\n".format(entry.title))
+					my_print("\nArticle:  '{}'\n\n".format(entry.title.encode('utf8')))
 					my_print("Word list:\n")
 					my_print(", ".join(wordlist))
 
@@ -223,4 +223,9 @@ if __name__ == '__main__':
 		for k, v in sorted(result.items(), key=itemgetter(1), reverse=True):
 			my_print("{}: {}\n".format(k, v))
 
-		time.sleep(interval_time)
+		after = datetime.datetime.now()
+		first = time_in_seconds_from_date(now)
+		second = time_in_seconds_from_date(after)
+		diff = int(round(second - first)) + 3
+		sleep_time = interval_time - diff
+		time.sleep(sleep_time)
