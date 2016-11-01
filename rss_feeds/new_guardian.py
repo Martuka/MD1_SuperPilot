@@ -21,7 +21,7 @@ from operator import itemgetter
 
 # Adafruit library realted imports
 import atexit
-# from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor, Adafruit_StepperMotor
+from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor, Adafruit_StepperMotor
 
 
 ###############################################################################
@@ -104,11 +104,11 @@ def my_print(string):
 		logs.write(string + "\n")
 
 # Recommended for auto-disabling motors on shutdown!
-# def turnOffMotors():
-# 	mh.getMotor(1).run(Adafruit_MotorHAT.RELEASE)
-# 	mh.getMotor(2).run(Adafruit_MotorHAT.RELEASE)
-# 	mh.getMotor(3).run(Adafruit_MotorHAT.RELEASE)
-# 	mh.getMotor(4).run(Adafruit_MotorHAT.RELEASE)
+def turnOffMotors():
+	mh.getMotor(1).run(Adafruit_MotorHAT.RELEASE)
+	mh.getMotor(2).run(Adafruit_MotorHAT.RELEASE)
+	mh.getMotor(3).run(Adafruit_MotorHAT.RELEASE)
+	mh.getMotor(4).run(Adafruit_MotorHAT.RELEASE)
 
 # Make the two motors turn simultaniously
 def rotate_motors(motor1, motor2):
@@ -149,15 +149,15 @@ if __name__ == '__main__':
 	interval_time = 120 # check_args()
 
 	# create a default object, no changes to I2C address or frequency
-	# mh = Adafruit_MotorHAT()
+	mh = Adafruit_MotorHAT()
 
-	# atexit.register(turnOffMotors)
+	atexit.register(turnOffMotors)
 	atexit.register(close_logfile)
 
-	# motor1 = mh.getStepper(200, 1)  	# 200 steps/rev, motor port #1
-	# motor1.setSpeed(60)  				# RPM
-	# motor2 = mh.getStepper(200, 2)
-	# motor2.setSpeed(60)
+	motor1 = mh.getStepper(200, 1)  	# 200 steps/rev, motor port #1
+	motor1.setSpeed(60)  				# RPM
+	motor2 = mh.getStepper(200, 2)
+	motor2.setSpeed(60)
 
 	refresh_db_with_recent_articles()
 
@@ -203,7 +203,7 @@ if __name__ == '__main__':
 
 					for word in wordlist:
 						if word in key_words:
-							# rotate_motors(motor1, motor2)
+							rotate_motors(motor1, motor2)
 							article_list.append(word)
 
 					matching_words.extend(article_list)
