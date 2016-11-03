@@ -104,9 +104,11 @@ def date_from_seconds(seconds):
 
 # Verify if an article has been published more recently that interval time.
 def new_article(entry, now, interval):
-	published_parsed = entry.published_parsed
+	published_parsed = entry.updated_parsed
 	delta = time_in_seconds_from_date(now) - time_in_seconds_from_date(date_from_time_struct(published_parsed))
 	if delta <= interval:
+	        print "Article", entry.title.encode('utf8')
+	        print "publication time =", date_from_time_struct(entry.updated_parsed)
 		return True
 	return False
 

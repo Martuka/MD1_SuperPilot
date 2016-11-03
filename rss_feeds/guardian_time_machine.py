@@ -104,7 +104,8 @@ def date_from_seconds(seconds):
 # Verify if an article has been published more recently that interval time.
 def new_article(entry, now, interval):
 	published_parsed = entry.updated_parsed
-	delta = time_in_seconds_from_date(now) - time_in_seconds_from_date(date_from_time_struct(published_parsed))
+	new_now = time_in_seconds_from_date(now) - interval
+	delta = new_now - time_in_seconds_from_date(date_from_time_struct(published_parsed))
 	if delta <= interval:
 		return True
 	return False
@@ -127,7 +128,7 @@ def rotate_motors(motor1, motor2):
 #	for i in range(0, 200):
 #		motor1.oneStep(Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.INTERLEAVE)
 #		motor2.oneStep(Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.INTERLEAVE)
-	for i in range(0, 200):
+	for i in range(0, 1600):
 		motor1.oneStep(Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.MICROSTEP)
 		motor2.oneStep(Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.MICROSTEP)
 	time.sleep(1)
